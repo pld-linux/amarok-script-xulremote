@@ -2,7 +2,7 @@
 Summary:	Control amaroK from any Firefox browser on your network
 Name:		amarok-script-%{scriptname}
 Version:	1.0
-Release:	0.1
+Release:	1
 License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/xul-amarok/xulremote-%{version}.amarokscript.tar.gz
@@ -13,13 +13,11 @@ Requires:	amarok > 1.3
 Requires:	kdebindings-python-dcop
 Requires:	python >= 2.3
 Requires:	python-PyQt
-# Requires: Firefox deer park (tested 1.5 beta1)
+Suggests:	mozilla-firefox >= 1.5
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_scriptdir %{_datadir}/apps/amarok/scripts
-#%define		_xuldir		%{_datadir}/xulrunner
-%define		_xuldir		%{_scriptdir}/%{scriptname}/xul
 
 %description
 An Firefox extension to use amaroK from your network. You can control
@@ -28,6 +26,9 @@ the player, browse your collection and manage the playlist.
 AmaroK XUL Remote is an amaroK script that allows you to control
 amaroK from any Firefox browser on your network.
 
+To install the Firefox extension, open in Firefox
+<http://amarok_host:8888>, and install the extension.
+
 %prep
 %setup -q -n %{scriptname}
 %{__sed} -i -e 's,\r$,,' README
@@ -35,9 +36,7 @@ amaroK from any Firefox browser on your network.
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_scriptdir}/%{scriptname},%{_xuldir}}
-cp -a *.py *.ui XulRemote.spec $RPM_BUILD_ROOT%{_scriptdir}/%{scriptname}
-cp -a README Changelog $RPM_BUILD_ROOT%{_scriptdir}/%{scriptname}
-cp -a xul-amarok.xpi $RPM_BUILD_ROOT%{_xuldir}
+cp -a . $RPM_BUILD_ROOT%{_scriptdir}/%{scriptname}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -48,9 +47,14 @@ rm -rf $RPM_BUILD_ROOT
 # README must be here in %files, not in %doc
 %{_scriptdir}/%{scriptname}/README
 %{_scriptdir}/%{scriptname}/Changelog
+
 %{_scriptdir}/%{scriptname}/*.spec
 %{_scriptdir}/%{scriptname}/*.ui
-%attr(755,root,root) %{_scriptdir}/%{scriptname}/*.py
-#%attr(755,root,root) %{_scriptdir}/%{scriptname}/*.sh
+%{_scriptdir}/%{scriptname}/*.xpi
+%{_scriptdir}/%{scriptname}/Amarok.py
+%{_scriptdir}/%{scriptname}/AmarokHTTPServer.py
+%{_scriptdir}/%{scriptname}/XULremoteConfigDialog.py
 
-%{_xuldir}
+# Do not mark any other file executable than the main script as amarok thinks
+# it's a plugin frontend.
+%attr(755,root,root) %{_scriptdir}/%{scriptname}/XulRemote.py
