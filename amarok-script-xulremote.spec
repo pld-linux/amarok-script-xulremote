@@ -7,7 +7,7 @@ License:	GPL
 Group:		X11/Applications/Multimedia
 Source0:	http://dl.sourceforge.net/xul-amarok/xulremote-%{version}.amarokscript.tar.gz
 # Source0-md5:	6f0ceb519bf9e91ce6785610a75680a1
-URL:		http://linux.softpedia.com/get/Multimedia/Audio/amaroK-Scripts/amaroK-XUL-Remote-9555.shtml
+URL:		http://kde-apps.org/content/show.php?content=23630
 BuildRequires:	sed >= 4.0
 Requires:	amarok > 1.3
 Requires:	kdebindings-python-dcop
