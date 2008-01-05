@@ -1,5 +1,6 @@
 %define		scriptname	xulremote
 Summary:	Control amaroK from any Firefox browser on your network
+Summary(pl.UTF-8):	Sterowanie amaroKiem z dowolnej przeglądarki Firefox w sieci
 Name:		amarok-script-%{scriptname}
 Version:	1.0
 Release:	1
@@ -27,7 +28,18 @@ AmaroK XUL Remote is an amaroK script that allows you to control
 amaroK from any Firefox browser on your network.
 
 To install the Firefox extension, open in Firefox
-<http://amarok_host:8888>, and install the extension.
+<http://amarok_host:8888/>, and install the extension.
+
+%description -l pl.UTF-8
+Rozszerzenie Firefoksa do używania amaroKa z sieci. Pozwala sterować
+odtwarzaczem, przeglądać kolekcję muzyki i zarządzać listą
+odtwarzania.
+
+AmaroK XUL Remote to skrypt amaroKa pozwalający na sterowanie
+amaroKiem z dowolnej przeglądarki Firefox w sieci.
+
+Aby zainstalować rozszerzenie Firefoksa, należy otworzyć w Firefoksie
+adres <http://host_z_amarokiem:8888/> i zainstalować rozszerzenie.
 
 %prep
 %setup -q -n %{scriptname}
